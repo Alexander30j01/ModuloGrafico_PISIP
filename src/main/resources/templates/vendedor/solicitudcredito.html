@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{plantilla/plantillavendedor}">
+<head>
+    <title>Solicitud de Crédito - El Rey</title>
+</head>
+<body>
+
+    <div layout:fragment="contentpaginasvendedor">
+        <div class="page-header mb-4 d-flex justify-content-between align-items-center">
+            <h1 class="page-title text-orange"><i class="fe fe-file-text"></i> Expediente Financiero para Crédito</h1>
+            <a th:href="@{/vendedor/atender/nuevo}" class="btn btn-secondary btn-sm">
+                <i class="fe fe-arrow-left"></i> Regresar
+            </a>
+        </div>
+
+        <form th:action="@{/vendedor/atender/registrar-credito}" method="POST" enctype="multipart/form-data" class="card shadow-sm border-orange">
+            <div class="card-header bg-orange-lt">
+                <h3 class="card-title font-weight-bold text-orange m-0">Análisis de Riesgo y Validación de Identidad</h3>
+            </div>
+            
+            <div class="card-body">
+                
+                <!-- REFERENCIA 1 -->
+                <h4 class="mb-3 text-blue font-weight-bold"><i class="fe fe-check-square"></i> 1. Referencia Comercial Principal (Opcional)</h4>
+                <div class="row mb-4 bg-light p-3 border rounded">
+                    <div class="col-md-4 form-group">
+                        <label class="form-label font-weight-bold">Nombre Contacto</label>
+                        <input type="text" name="ref1_nombre" class="form-control" placeholder="Ej: Sr. Alejandro Silva">
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label class="form-label font-weight-bold">Empresa</label>
+                        <input type="text" name="ref1_empresa" class="form-control" placeholder="Ej: Juguetes S.A.">
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label class="form-label font-weight-bold">Teléfono</label>
+                        <input type="text" name="ref1_telefono" class="form-control" placeholder="Ej: 0990001122">
+                    </div>
+                    <div class="col-md-5 form-group mb-0">
+                        <label class="form-label">¿Qué compra?</label>
+                        <input type="text" name="ref1_que_compra" class="form-control" placeholder="Línea plástica">
+                    </div>
+                    <div class="col-md-4 form-group mb-0">
+                        <label class="form-label">Monto Promedio ($)</label>
+                        <input type="number" step="0.01" name="ref1_monto" class="form-control" placeholder="1000.00">
+                    </div>
+                    <div class="col-md-3 form-group mb-0">
+                        <label class="form-label">Modalidad</label>
+                        <select name="ref1_modalidad" class="form-control">
+                            <option value="CREDITO">Crédito</option>
+                            <option value="CONTADO">Contado</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- REFERENCIA 2 -->
+                <h4 class="mb-3 text-muted font-weight-bold"><i class="fe fe-minus-square"></i> 2. Referencia Comercial Secundaria (Opcional)</h4>
+                <div class="row mb-4 p-3 border rounded">
+                    <div class="col-md-4 form-group">
+                        <label class="form-label">Nombre Contacto</label>
+                        <input type="text" name="ref2_nombre" class="form-control" placeholder="Ej: Dra. Lucía Vélez">
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label class="form-label">Empresa</label>
+                        <input type="text" name="ref2_empresa" class="form-control" placeholder="Ej: Distribuidora Norte">
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label class="form-label">Teléfono</label>
+                        <input type="text" name="ref2_telefono" class="form-control" placeholder="Ej: 0988776655">
+                    </div>
+                </div>
+
+                <hr>
+
+                <!-- DOCUMENTACIÓN -->
+                <h4 class="mb-3 text-muted font-weight-bold"><i class="fe fe-paperclip"></i> 3. Documentación y Firma de Seguridad</h4>
+                <div class="row mb-4">
+                    <div class="col-md-6 form-group">
+                        <label class="form-label font-weight-bold">Copia del RUC Vigente (PDF / Imagen)</label>
+                        <input type="file" name="archivoRuc" class="form-control">
+                    </div>
+                    
+                    <div class="col-md-6 form-group">
+                        <label class="form-label font-weight-bold text-orange"><i class="fe fe-camera"></i> Foto de Validación (Cliente + Cédula)</label>
+                        <input type="file" name="archivoValidacionCedula" class="form-control" accept="image/*" capture="user">
+                    </div>
+                </div>
+
+                <!-- Cláusula Legal de AVAL -->
+                <div class="card bg-orange-lt border-orange text-dark shadow-none m-0">
+                    <div class="card-body p-4" style="line-height: 1.6; font-size: 0.95rem;">
+                        <label class="custom-control custom-checkbox m-0">
+                            <input type="checkbox" class="custom-control-input" name="autorizacionAval" value="true" required>
+                            <span class="custom-control-label font-weight-bold text-justify d-block">
+                                DECLARACIÓN Y AUTORIZACIÓN EXPRESA: Autorizo a <strong>IMPORTADORA EL REY</strong> a realizar el análisis crediticio pertinente.
+                            </span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card-footer text-right bg-light">
+                <button type="submit" class="btn btn-warning btn-lg font-weight-bold px-5 shadow-sm">
+                    <i class="fe fe-check-circle"></i> Enviar Expediente e Ir a Catálogo
+                </button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

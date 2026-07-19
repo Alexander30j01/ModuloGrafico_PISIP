@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{plantilla/plantillavendedor}">
+<head>
+    <title>Inicio Ventas - El Rey</title>
+</head>
+<body>
+
+    <div layout:fragment="contentpaginasvendedor">
+        <!-- CABECERA -->
+        <div class="page-header mb-4">
+            <h1 class="page-title"><i class="fe fe-home"></i> Panel Principal de Ventas</h1>
+        </div>
+
+        <!-- INDICADORES CLAVE (KPIs) -->
+        <div class="row row-cards mb-5">
+            <div class="col-sm-6 col-lg-3">
+                <div class="card p-3">
+                    <div class="d-flex align-items-center">
+                        <span class="stamp stamp-md bg-blue mr-3"><i class="fe fe-shopping-cart"></i></span>
+                        <div>
+                            <h4 class="m-0 text-bold">15</h4>
+                            <small class="text-muted">Pedidos del Mes</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="card p-3">
+                    <div class="d-flex align-items-center">
+                        <span class="stamp stamp-md bg-green mr-3"><i class="fe fe-map-pin"></i></span>
+                        <div>
+                            <h4 class="m-0 text-bold">8 / 12</h4>
+                            <small class="text-muted">Visitas de Hoy</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="card p-3">
+                    <div class="d-flex align-items-center">
+                        <span class="stamp stamp-md bg-warning mr-3"><i class="fe fe-user-plus"></i></span>
+                        <div>
+                            <h4 class="m-0 text-bold">3</h4>
+                            <small class="text-muted">Clientes Nuevos</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="card p-3">
+                    <div class="d-flex align-items-center">
+                        <span class="stamp stamp-md bg-indigo mr-3"><i class="fe fe-dollar-sign"></i></span>
+                        <div>
+                            <h4 class="m-0 text-bold">$3,450.00</h4>
+                            <small class="text-muted">Total Facturado</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ACCIONES RÁPIDAS DE ESCRITORIO -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card text-center p-5 h-100">
+                    <div class="card-body d-flex flex-column justify-content-center">
+                        <div class="mb-4 text-blue"><i class="fe fe-search" style="font-size: 3.5rem;"></i></div>
+                        <h2>Atender y Registrar Cliente</h2>
+                        <p class="text-muted">Busca al cliente por RUC o Cédula para validar si es nuevo o existente, registrar su ubicación satelital y abrir el pedido.</p>
+                        <div class="mt-3">
+                            <a th:href="@{/vendedor/atender}" class="btn btn-primary btn-lg px-5"><i class="fe fe-play"></i> Iniciar Atención</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card text-center p-5 h-100">
+                    <div class="card-body d-flex flex-column justify-content-center">
+                        <div class="mb-4 text-green"><i class="fe fe-package" style="font-size: 3.5rem;"></i></div>
+                        <h2>Consultar Catálogo</h2>
+                        <p class="text-muted">Visualiza la lista completa de juguetes, verifica los precios mayoristas vigentes y revisa el stock disponible en tiempo real.</p>
+                        <div class="mt-3">
+                            <a th:href="@{/vendedor/catalogo}" class="btn btn-outline-primary btn-lg px-5"><i class="fe fe-book-open"></i> Ver Productos</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

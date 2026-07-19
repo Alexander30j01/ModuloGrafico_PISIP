@@ -1,0 +1,74 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta http-equiv="Content-Language" content="es" />
+<title>Admin - Importadora El Rey</title>
+
+<link class="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link class="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700">
+
+<script th:src="@{/assets/js/require.min.js}"></script>
+<script>requirejs.config({ baseUrl : '/' });</script>
+
+<link th:href="@{/assets/css/dashboard.css}" rel="stylesheet" />
+<script th:src="@{/assets/js/dashboard.js}"></script>
+</head>
+<body>
+	<div class="page">
+		<div class="page-main">
+			<!-- Encabezado Administrador -->
+			<div class="header py-4 bg-blue text-white">
+				<div class="container d-flex">
+					<a class="header-brand text-white" th:href="@{/admin/inicio}">
+						<strong><i class="fe fe-sliders"></i> IMPORTADORA EL REY | ADMINISTRACIÓN</strong>
+					</a>
+					
+					<!-- Menú de Usuario y Cerrar Sesión (Estilizado para fondo azul) -->
+					<div class="d-flex order-lg-2 ml-auto">
+						<div class="dropdown">
+							<a href="#" class="nav-link pr-0 leading-none text-white" data-toggle="dropdown"> 
+								<span class="avatar bg-white text-blue"><i class="fe fe-lock"></i></span>
+								<span class="ml-2 d-none d-lg-block"> 
+									<span class="text-white">Admin Global</span> 
+									<small class="text-light d-block mt-1">Super Administrador</small>
+								</span>
+							</a>
+							<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+								<a class="dropdown-item" href="#"> <i class="dropdown-icon fe fe-user"></i> Mi Perfil</a> 
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item text-danger" th:href="@{/logout}"> <i class="dropdown-icon fe fe-log-out text-danger"></i> Cerrar Sesión</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Menú Administrador -->
+			<div class="header collapse d-lg-flex p-0" id="headerMenuCollapse">
+				<div class="container">
+					<ul class="nav nav-tabs border-0 flex-column flex-lg-row">
+						<li class="nav-item"><a th:href="@{/admin/creditos}" class="nav-link"><i class="fe fe-thumbs-up"></i> Solicitudes de Crédito</a></li>
+						<li class="nav-item"><a th:href="@{/admin/usuarios}" class="nav-link"><i class="fe fe-user-plus"></i> Usuarios y Permisos</a></li>
+						<li class="nav-item"><a th:href="@{/admin/productos}" class="nav-link"><i class="fe fe-box"></i> Productos y Precios</a></li>
+						<li class="nav-item"><a th:href="@{/admin/provincias}" class="nav-link"><i class="fe fe-map-pin"></i> Asignar Provincias</a></li>
+					</ul>
+				</div>
+			</div>
+
+			<!-- Contenido Dinámico -->
+			<div class="my-3 my-md-5">
+				<div class="container" layout:fragment="content"></div>
+			</div>
+		</div>
+		<footer class="footer">
+			<div class="container text-center">
+				Copyright © 2026 <a href="#">Importadora El Rey</a>. Todos los derechos reservados.
+			</div>
+		</footer>
+	</div>
+</body>
+</html>

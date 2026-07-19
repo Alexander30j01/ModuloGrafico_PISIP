@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Iniciar Sesión - Importadora El Rey</title>
+    
+    <!-- Fuentes e Iconos -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700">
+    
+    <!-- Enlaces a Estilos (Thymeleaf para el servidor y href relativo para tus pruebas locales) -->
+    <link th:href="@{/assets/css/dashboard.css}" href="./assets/css/dashboard.css" rel="stylesheet" />
+</head>
+<body class="">
+    <div class="page">
+        <div class="page-single">
+            <div class="container">
+                <div class="row">
+                    <div class="col col-login mx-auto">
+                        
+                        <!-- Identidad Corporativa -->
+                        <div class="text-center mb-6">
+                            <h2 class="text-blue font-weight-bold">
+                                <i class="fa fa-cubes text-primary"></i> IMPORTADORA EL REY
+                            </h2>
+                            <p class="text-muted small">Sistema de Gestión de Ventas </p>
+                        </div>
+                        
+                        <!-- FORMULARIO: Apunta por GET al catálogo del vendedor para simular la navegación en Frontend -->
+                        <form class="card" th:action="@{/vendedor/catalogo}" action="/vendedor/catalogo" method="get" id="formLogin">
+                            <div class="card-body p-6">
+                                <div class="card-title text-center font-weight-bold text-muted mb-4">Acceso al Sistema</div>
+                                
+                                <!-- Alerta de error oculta (lista para cuando uses Spring Security con ?error) -->
+                                <div th:if="${param.error}" class="alert alert-danger p-2 small text-center" role="alert">
+                                    <i class="fa fa-exclamation-triangle"></i> Usuario o contraseña incorrectos.
+                                </div>
+                                
+                                <!-- Alerta de cierre de sesión oculta (para ?logout) -->
+                                <div th:if="${param.logout}" class="alert alert-success p-2 small text-center" role="alert">
+                                    <i class="fa fa-check-circle"></i> Sesión cerrada correctamente.
+                                </div>
+
+                                <!-- Entrada: Usuario -->
+                                <div class="form-group">
+                                    <label class="form-label" for="username">Nombre de Usuario o Correo</label>
+                                    <input type="text" class="form-control" id="username" name="username" required placeholder="Ej: vendedor01">
+                                </div>
+                                
+                                <!-- Entrada: Contraseña -->
+                                <div class="form-group">
+                                    <label class="form-label" for="password">Contraseña</label>
+                                    <input type="password" class="form-control" id="password" name="password" required placeholder="••••••••">
+                                </div>
+                                
+                                <!-- Recordar Sesión -->
+                                <div class="form-group">
+                                    <label class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" name="remember-me" />
+                                        <span class="custom-control-label">Recordar mi sesión</span>
+                                    </label>
+                                </div>
+                                
+                                <!-- Botón de Ingreso -->
+                                <div class="form-footer">
+                                    <button type="submit" class="btn btn-primary btn-block font-weight-bold">
+                                        <i class="fa fa-sign-in"></i> Ingresar 
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        
+                        <!-- Pie de página -->
+                        <div class="text-center text-muted small">
+                            ¿Problemas con tu acceso? Contacta a <a href="mailto:hola@importadoraelrey.com">Soporte Técnico</a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

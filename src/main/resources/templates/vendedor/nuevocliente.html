@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{plantilla/plantillavendedor}">
+<head>
+    <title>Alta de Cliente - El Rey</title>
+</head>
+<body>
+
+    <div layout:fragment="contentpaginasvendedor">
+        <div class="page-header mb-4 d-flex justify-content-between align-items-center">
+            <h1 class="page-title"><i class="fe fe-user-plus"></i> Identificación Comercial y Prospección</h1>
+            <a th:href="@{/vendedor/atender}" class="btn btn-secondary btn-sm">
+                <i class="fe fe-arrow-left"></i> Cancelar
+            </a>
+        </div>
+
+        <form th:action="@{/vendedor/atender/registrar-base}" method="POST" enctype="multipart/form-data" class="card shadow-sm">
+            <div class="card-header bg-light">
+                <h3 class="card-title font-weight-bold m-0 text-blue">1. Datos Generales de la Visita</h3>
+            </div>
+            
+            <div class="card-body">
+                <!-- Pestañas de Navegación -->
+                <ul class="nav nav-tabs mb-4" id="tabsNuevo" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="empresa-tab" data-toggle="tab" href="#empresaContent">1. Empresa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="kyc-tab" data-toggle="tab" href="#kycContent">2. Contactos (KYC)</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="geo-tab" data-toggle="tab" href="#geoContent">3. Ubicación y Registro Físico</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <!-- Pestaña 1: Empresa -->
+                    <div class="tab-pane fade show active" id="empresaContent">
+                        <div class="row">
+                            <div class="col-md-4 form-group">
+                                <label class="form-label font-weight-bold text-danger">RUC / Cédula *</label>
+                                <input type="text" name="ruc" class="form-control border-danger" placeholder="1792345678001" maxlength="13" required>
+                            </div>
+                            <div class="col-md-4 form-group"><label class="form-label font-weight-bold">Razón Social</label><input type="text" name="nombre" class="form-control" placeholder="Importadora Alfa"></div>
+                            <div class="col-md-4 form-group"><label class="form-label font-weight-bold">Nombre Comercial</label><input type="text" name="nombre_comercial" class="form-control" placeholder="El Palacio del Juguete"></div>
+                            <div class="col-md-4 form-group"><label class="form-label font-weight-bold">Teléfono</label><input type="text" name="telefono" class="form-control" placeholder="022345678"></div>
+                            <div class="col-md-8 form-group"><label class="form-label font-weight-bold">Email Facturación</label><input type="email" name="email" class="form-control" placeholder="correo@comercio.com"></div>
+                            <div class="col-md-12 form-group"><label class="form-label font-weight-bold">Dirección Completa</label><input type="text" name="direccion" class="form-control" placeholder="Provincia, Ciudad, Calles..."></div>
+                            
+                            <div class="col-12 form-group mt-2">
+                                <label class="form-label font-weight-bold text-muted"><i class="fe fe-message-square"></i> Observaciones Generales de la Empresa</label>
+                                <textarea name="observaciones_visita" class="form-control" rows="3" placeholder="Detalles particulares del negocio..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pestaña 2: KYC -->
+                    <div class="tab-pane fade" id="kycContent">
+                        <div class="row">
+                            <div class="col-md-6 border-right">
+                                <h4 class="text-blue mb-3 font-weight-bold"><i class="fe fe-shopping-bag"></i> Encargado de Compras</h4>
+                                <div class="form-group"><label class="form-label">Nombre</label><input type="text" name="encargado_compras" class="form-control"></div>
+                                <div class="form-group"><label class="form-label">Teléfono</label><input type="text" name="telefono_compras" class="form-control"></div>
+                                <div class="form-group"><label class="form-label">Horario</label><input type="text" name="horario_compras" class="form-control"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <h4 class="text-green mb-3 font-weight-bold"><i class="fe fe-truck"></i> Recibe Mercadería</h4>
+                                <div class="form-group"><label class="form-label">Nombre</label><input type="text" name="encargado_recepcion" class="form-control"></div>
+                                <div class="form-group"><label class="form-label">Teléfono</label><input type="text" name="telefono_recepcion" class="form-control"></div>
+                                <div class="form-group"><label class="form-label">Horario</label><input type="text" name="horario_recepcion" class="form-control"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pestaña 3: GPS y Capturas -->
+                    <div class="tab-pane fade" id="geoContent">
+                        <div class="p-4 bg-light border rounded">
+                            <div class="text-center mb-4">
+                                <button type="button" class="btn btn-primary shadow-sm" onclick="obtenerGps()"><i class="fe fe-map-pin"></i> Capturar Coordenadas Satelitales</button>
+                            </div>
+                            <div class="row mb-4 justify-content-center">
+                                <div class="col-md-4"><label class="form-label">Latitud</label><input type="text" id="lat" name="latitud" class="form-control text-center font-weight-bold bg-white" readonly></div>
+                                <div class="col-md-4"><label class="form-label">Longitud</label><input type="text" id="lon" name="longitud" class="form-control text-center font-weight-bold bg-white" readonly></div>
+                            </div>
+                            <hr>
+                            <div class="form-group m-0">
+                                <label class="form-label font-weight-bold text-muted"><i class="fe fe-camera"></i> Fotografía de Referencia de la Fachada Comercial</label>
+                                <input type="file" name="archivoLocal" class="form-control" accept="image/*">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card-footer bg-light d-flex flex-wrap justify-content-between align-items-center">
+                <button type="submit" name="accion" value="PROSPECCION" class="btn btn-secondary btn-lg font-weight-bold px-4">
+                    <i class="fe fe-eye"></i> Solo Prospección
+                </button>
+                <div>
+                    <button type="submit" name="accion" value="CONTADO" class="btn btn-success btn-lg font-weight-bold px-4 mr-2">
+                        <i class="fe fe-shopping-cart"></i> Venta a Contado
+                    </button>
+                    <!-- ENLACE DIRECTO CORREGIDO PARA EVITAR EL BLOQUEO DEL FORMULARIO -->
+                    <a th:href="@{/vendedor/atender/credito}" class="btn btn-warning btn-lg font-weight-bold px-4">
+                        <i class="fe fe-file-text"></i> Solicitar Crédito <i class="fe fe-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function obtenerGps() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition((p) => {
+                    document.getElementById('lat').value = p.coords.latitude;
+                    document.getElementById('lon').value = p.coords.longitude;
+                });
+            }
+        }
+    </script>
+</body>
+</html>
