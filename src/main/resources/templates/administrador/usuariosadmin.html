@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{plantilla/plantillaadministrador}">
+<head>
+    <title>Gestión de Usuarios y Permisos</title>
+</head>
+<body>
+
+    <div layout:fragment="contentpaginasadmin">
+        
+        <!-- CABECERA -->
+        <div class="page-header mb-4">
+            <h1 class="page-title">
+                <i class="fe fe-users"></i> Control de Usuarios y Permisos
+            </h1>
+            <p class="text-muted mb-0 ml-2">| Alta de personal y asignación de niveles de acceso al sistema.</p>
+        </div>
+
+        <div class="row">
+            <!-- COLUMNA IZQUIERDA: LISTA DE USUARIOS Y ESTADOS -->
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Cuentas Registradas</h3>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table card-table table-vcenter text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th>Usuario / Empleado</th>
+                                    <th>Rol de Acceso</th>
+                                    <th>Estado Cuenta</th>
+                                    <th class="text-center">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Usuario 1 -->
+                                <tr>
+                                    <td>
+                                        <span class="text-bold">Carlos Mendoza</span>
+                                        <div class="small text-muted">carlos.mendoza@importadora.com</div>
+                                    </td>
+                                    <td>
+                                        <span class="badge badge-primary">VENDEDOR</span>
+                                    </td>
+                                    <td>
+                                        <span class="badge badge-success">Activo</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <form href="#" method="POST" class="d-inline">
+                                            <button type="submit" class="btn btn-sm btn-outline-warning" title="Inactivar / Bloquear">
+                                                <i class="fe fe-lock"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <!-- Usuario 2 -->
+                                <tr>
+                                    <td>
+                                        <span class="text-bold">Ana Gutiérrez</span>
+                                        <div class="small text-muted">ana.gutierrez@importadora.com</div>
+                                    </td>
+                                    <td>
+                                        <span class="badge badge-primary">VENDEDOR</span>
+                                    </td>
+                                    <td>
+                                        <span class="badge badge-success">Activo</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <form href="#" method="POST" class="d-inline">
+                                            <button type="submit" class="btn btn-sm btn-outline-warning" title="Inactivar / Bloquear">
+                                                <i class="fe fe-lock"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <!-- Usuario 3 -->
+                                <tr>
+                                    <td>
+                                        <span class="text-bold">Admin Principal</span>
+                                        <div class="small text-muted">admin@importadora.com</div>
+                                    </td>
+                                    <td>
+                                        <span class="badge badge-danger">ADMINISTRADOR</span>
+                                    </td>
+                                    <td>
+                                        <span class="badge badge-success">Activo</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <button class="btn btn-sm btn-outline-secondary" disabled title="No ejecutable sobre sí mismo">
+                                            <i class="fe fe-shield-off"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COLUMNA DERECHA: CREAR NUEVO USUARIO -->
+            <div class="col-lg-4">
+                <div class="card border-blue">
+                    <div class="card-header bg-blue text-white">
+                        <h3 class="card-title"><i class="fe fe-user-plus"></i> Registrar Usuario</h3>
+                    </div>
+                    <div class="card-body">
+                        <form href="#" method="POST">
+                            <!-- Nombre Completo -->
+                            <div class="form-group mb-2">
+                                <label class="form-label text-bold">Nombres y Apellidos</label>
+                                <input type="text" class="form-control form-control-sm" name="nombre" placeholder="Ej: Juan Pérez" required>
+                            </div>
+
+                            <!-- Correo Institucional -->
+                            <div class="form-group mb-2">
+                                <label class="form-label text-bold">Correo Electrónico (Username)</label>
+                                <input type="email" class="form-control form-control-sm" name="email" placeholder="usuario@importadora.com" required>
+                            </div>
+
+                            <!-- Clave Temporal -->
+                            <div class="form-group mb-2">
+                                <label class="form-label text-bold">Contraseña Temporal</label>
+                                <input type="password" class="form-control form-control-sm" name="password" placeholder="••••••••" required>
+                            </div>
+
+                            <!-- Rol del Usuario -->
+                            <div class="form-group mb-4">
+                                <label class="form-label text-bold">Asignar Rol Inicial</label>
+                                <select class="form-control form-control-sm" name="rol" required>
+                                    <option value="" disabled selected>Seleccione un nivel...</option>
+                                    <option value="VENDEDOR">Asesor Comercial (Vendedor)</option>
+                                    <option value="ADMINISTRADOR">Administrador de Sistema</option>
+                                </select>
+                            </div>
+
+                            <!-- Botón Guardar -->
+                            <button type="submit" class="btn btn-blue btn-block text-bold">
+                                <i class="fe fe-user-check"></i> Crear Cuenta de Acceso
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

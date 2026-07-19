@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{plantilla/plantillaadministrador}">
+<head>
+    <title>Asignación de Provincias</title>
+</head>
+<body>
+
+    <div layout:fragment="contentpaginasadmin">
+        
+        <!-- CABECERA -->
+        <div class="page-header mb-4">
+            <h1 class="page-title">
+                <i class="fe fe-map-pin"></i> Zonificación y Asignación de Provincias
+            </h1>
+            <p class="text-muted mb-0 ml-2">| Control de territorios de venta asignados a cada asesor comercial en campo.</p>
+        </div>
+
+        <div class="row">
+            <!-- COLUMNA IZQUIERDA: PROVINCIAS ASIGNADAS ACTUALMENTE -->
+            <div class="col-lg-7">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Territorios Comerciales Activos</h3>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table card-table table-vcenter text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th>Provincia</th>
+                                    <th>Región</th>
+                                    <th>Vendedor Responsable</th>
+                                    <th class="text-center">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Ejemplo 1 -->
+                                <tr>
+                                    <td><span class="text-bold text-azure">Pichincha</span></td>
+                                    <td>Sierra</td>
+                                    <td>
+                                        <div class="text-bold">Carlos Mendoza</div>
+                                        <small class="text-muted">ID: VEND-001</small>
+                                    </td>
+                                    <td class="text-center">
+                                        <form href="#" method="POST">
+                                            <button type="submit" class="btn btn-sm btn-outline-danger" title="Revocar Territorio">
+                                                <i class="fe fe-trash-2"></i> Quitar
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <!-- Ejemplo 2 -->
+                                <tr>
+                                    <td><span class="text-bold text-azure">Guayas</span></td>
+                                    <td>Costa</td>
+                                    <td>
+                                        <div class="text-bold">Ana Gutiérrez</div>
+                                        <small class="text-muted">ID: VEND-002</small>
+                                    </td>
+                                    <td class="text-center">
+                                        <form href="#" method="POST">
+                                            <button type="submit" class="btn btn-sm btn-outline-danger" title="Revocar Territorio">
+                                                <i class="fe fe-trash-2"></i> Quitar
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COLUMNA DERECHA: FORMULARIO DE ASIGNACIÓN -->
+            <div class="col-lg-5">
+                <div class="card border-primary">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="card-title"><i class="fe fe-plus-square"></i> Asignar Nueva Zona</h3>
+                    </div>
+                    <div class="card-body">
+                        <form href="#" method="POST">
+                            <!-- 1. Selección del Vendedor -->
+                            <div class="form-group mb-3">
+                                <label class="form-label text-bold">1. Seleccionar Vendedor</label>
+                                <select class="form-control" name="vendedorId" required>
+                                    <option value="" disabled selected>Escoja un asesor comercial...</option>
+                                    <option value="1">Carlos Mendoza (Zona Sierra)</option>
+                                    <option value="2">Ana Gutiérrez (Zona Costa)</option>
+                                    <option value="3">Juan Pérez (Nacional)</option>
+                                </select>
+                            </div>
+
+                            <!-- 2. Selección de la Provincia -->
+                            <div class="form-group mb-4">
+                                <label class="form-label text-bold">2. Asignar Provincia de Destino</label>
+                                <select class="form-control" name="provinciaNombre" required>
+                                    <option value="" disabled selected>Escoja la provincia...</option>
+                                    <optgroup label="Costa">
+                                        <option value="Guayas">Guayas</option>
+                                        <option value="Manabí">Manabí</option>
+                                        <option value="El Oro">El Oro</option>
+                                    </optgroup>
+                                    <optgroup label="Sierra">
+                                        <option value="Pichincha">Pichincha</option>
+                                        <option value="Azuay">Azuay</option>
+                                        <option value="Tungurahua">Tungurahua</option>
+                                    </optgroup>
+                                    <optgroup label="Oriente">
+                                        <option value="Pastaza">Pastaza</option>
+                                        <option value="Morona Santiago">Morona Santiago</option>
+                                    </optgroup>
+                                </select>
+                                <small class="text-muted">Nota: Un vendedor puede tener múltiples provincias asociadas.</small>
+                            </div>
+
+                            <!-- Botón Ejecutar -->
+                            <button type="submit" class="btn btn-primary btn-block text-bold">
+                                <i class="fe fe-link"></i> Registrar Enlace Territorial
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

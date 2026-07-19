@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{plantilla/plantillaadministrador}">
+<head>
+    <title>Gestión de Créditos</title>
+</head>
+<body>
+
+    <div layout:fragment="contentpaginasadmin">
+        
+        <!-- CABECERA -->
+        <div class="page-header mb-4">
+            <h1 class="page-title">
+                <i class="fe fe-thumbs-up"></i> Control y Dictamen de Créditos
+            </h1>
+            <p class="text-muted mb-0 ml-2">| Redacción de Informe Aval y comentarios gerenciales.</p>
+        </div>
+
+        <div class="row">
+            <!-- COLUMNA IZQUIERDA: LISTA DE SOLICITUDES -->
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Solicitudes por Procesar</h3>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table card-table table-vcenter text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th>Cliente</th>
+                                    <th>Monto</th>
+                                    <th>Estado</th>
+                                    <th class="text-center">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="bg-gray-lightest" style="border-left: 3px solid #467fcf;">
+                                    <td>
+                                        <span class="text-bold">Bazar "Mil Novedades"</span>
+                                        <div class="small text-muted">RUC: 1792456789001</div>
+                                    </td>
+                                    <td class="text-bold text-blue">$2,500.00</td>
+                                    <td><span class="badge badge-warning">En Revisión</span></td>
+                                    <td class="text-center">
+                                        <button class="btn btn-sm btn-primary">
+                                            <i class="fe fe-edit-3"></i> Evaluando
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="text-bold">Comercial Ortega</span>
+                                        <div class="small text-muted">RUC: 0995544332001</div>
+                                    </td>
+                                    <td class="text-bold text-blue">$1,800.00</td>
+                                    <td><span class="badge badge-warning">Pendiente</span></td>
+                                    <td class="text-center">
+                                        <button class="btn btn-sm btn-outline-secondary">
+                                            <i class="fe fe-eye"></i> Seleccionar
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COLUMNA DERECHA: REDACCIÓN DEL INFORME AVAL Y COMENTARIOS -->
+            <div class="col-lg-6">
+                <div class="card border-blue">
+                    <div class="card-header bg-blue text-white">
+                        <h3 class="card-title"><i class="fe fe-file-text"></i> Registro de Informe Aval</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-secondary p-2 mb-3">
+                            <small class="text-muted d-block">Cliente Seleccionado:</small>
+                            <strong>Bazar y Juguetería "Mil Novedades"</strong>
+                        </div>
+
+                        <form href="#" method="POST">
+                            <!-- Detalle Técnico del Informe Aval -->
+                            <div class="form-group mb-3">
+                                <label class="form-label text-bold">Redactar Informe Aval del Cliente</label>
+                                <textarea class="form-control" name="informeAvalTexto" rows="5" 
+                                          placeholder="Escriba aquí los detalles del aval. Ejemplo: Se verifica solvencia del local comercial, flujo constante de caja y referencias comerciales positivas..."></textarea>
+                            </div>
+
+                            <!-- Comentarios Adicionales o Dictamen Final -->
+                            <div class="form-group mb-4">
+                                <label class="form-label text-bold">Comentarios u Observaciones Gerenciales</label>
+                                <textarea class="form-control" name="comentarioAdmin" rows="3" 
+                                          placeholder="Observaciones finales antes de emitir la resolución..."></textarea>
+                            </div>
+
+                            <!-- Botones de Resolución Final -->
+                            <div class="d-flex justify-content-between align-items-center">
+                                <button type="submit" class="btn btn-danger btn-pill">
+                                    <i class="fe fe-alert-triangle"></i> Rechazar Crédito
+                                </button>
+                                <button type="submit" class="btn btn-success btn-pill text-bold">
+                                    <i class="fe fe-check-circle"></i> Aprobar Crédito
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
