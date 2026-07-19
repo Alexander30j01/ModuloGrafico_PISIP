@@ -1,4 +1,4 @@
-package com.uisrael.consumoweb.controller;
+package com.uisrael.consumoweb.controller.View;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,13 +9,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.uisrael.consumoweb.model.dto.response.ClienteResponseDto;
+import com.uisrael.consumoweb.model.dto.response.DetallePedidoResponseDto;
 import com.uisrael.consumoweb.services.IClienteService;
+import com.uisrael.consumoweb.services.IDetallePedidoService;
 
 @Controller
 @RequestMapping("/vendedor")
 public class VendedorController {
 
 	private IClienteService servicioCliente;
+	private IDetallePedidoService servicioDetallePedido;
+
+	public VendedorController(IClienteService servicioCliente, IDetallePedidoService servicioDetallePedido) {
+		this.servicioCliente = servicioCliente;
+		this.servicioDetallePedido = servicioDetallePedido;
+	}
 
 	public VendedorController(IClienteService servicioCliente) {
 		this.servicioCliente = servicioCliente;
@@ -53,7 +61,8 @@ public class VendedorController {
 	}
 
 	@GetMapping("/carrito")
-	public String irPedido() {
+	public String irPedido(Model model) {
+		model.addAttribute("detallesCarrito", servicioDetallePedido.listarTodos());
 		return "vendedor/pedido";
 	}
 
@@ -80,6 +89,18 @@ public class VendedorController {
 		}
 
 		return "redirect:/vendedor/productos";
+	}
+
+	@PostMapping("/pedido/guardar-final")
+	public String guardarPedidoFinal(@ModelAttribute("detallePedidoDto") DetallePedidoResponseDto nuevoDetalle) {
+		try {
+			DetallePedidoResponseDto detalleGuardado = servicioDetallePedido.guardar(nuevoDetalle);
+			System.out.println("Controller: Detalle de pedido guardado en API. ID asignado: "
+					+ detalleGuardado.getIdDetallePedidos());
+		} catch (Exception e) {
+			System.out.println("Error en Controller al guardar el detalle del pedido en la API: " + e.getMessage());
+		}
+		return "redirect:/vendedor/inicio";
 	}
 
 	@PostMapping("/pedido/guardar-final")
