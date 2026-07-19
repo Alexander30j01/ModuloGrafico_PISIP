@@ -1,157 +1,179 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{plantilla/plantillaadministrador}">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{plantilla/plantillaadministrador}">
 <head>
-    <title>Gestión de Productos y Precios</title>
+<title>Gestión de Productos y Precios</title>
 </head>
 <body>
 
-    <div layout:fragment="contentpaginasadmin">
-        
-        <!-- CABECERA -->
-        <div class="page-header mb-4">
-            <h1 class="page-title">
-                <i class="fe fe-box"></i> Control de Inventario y Precios Mayoristas
-            </h1>
-            <p class="text-muted mb-0 ml-2">| Panel exclusivo de administración para alta de productos y edición de costos por lote.</p>
-        </div>
+	<div layout:fragment="contentpaginasadmin">
 
-        <div class="row">
-            <!-- COLUMNA IZQUIERDA: INVENTARIO EXISTENTE Y MODIFICACIÓN RÁPIDA -->
-            <div class="col-lg-8">
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h3 class="card-title">Lista General de Productos</h3>
-                        <div class="card-options">
-                            <div class="input-group">
-                                <input type="text" class="form-control form-control-sm" placeholder="Buscar juguete...">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-sm btn-default" type="button"><i class="fe fe-search"></i></button>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table card-table table-vcenter text-nowrap">
-                            <thead>
-                                <tr>
-                                    <th>Código / Juguete</th>
-                                    <th width="150">Precio Mayorista</th>
-                                    <th width="120">Stock Disp.</th>
-                                    <th class="text-center">Acción</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- Producto de Ejemplo 1 -->
-                                <form href="#" method="POST">
-                                    <tr>
-                                        <td>
-                                            <span class="text-bold">COD-9942 - Carro a Control Remoto Nitro</span>
-                                            <div class="small text-muted">Categoría: Vehículos a batería</div>
-                                        </td>
-                                        <td>
-                                            <div class="input-group input-group-sm">
-                                                <span class="input-group-prepend"><span class="input-group-text">$</span></span>
-                                                <input type="number" step="0.01" class="form-control font-weight-bold text-success" name="precio" value="18.50">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <input type="number" class="form-control form-control-sm text-center" name="stock" value="45">
-                                        </td>
-                                        <td class="text-center">
-                                            <button type="submit" class="btn btn-sm btn-primary" title="Guardar Cambios">
-                                                <i class="fe fe-save"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </form>
+		<!-- CABECERA -->
+		<div class="page-header mb-4">
+			<h1 class="page-title">
+				<i class="fe fe-box"></i> Control de Inventario y Precios Mayoristas
+			</h1>
+			<p class="text-muted mb-0 ml-2">| Panel exclusivo de
+				administración para alta de productos y edición de costos por lote.</p>
+		</div>
 
-                                <!-- Producto de Ejemplo 2 -->
-                                <form href="#" method="POST">
-                                    <tr>
-                                        <td>
-                                            <span class="text-bold">COD-1053 - Muñeca Articulada Princesa</span>
-                                            <div class="small text-muted">Categoría: Muñecas y Accesorios</div>
-                                        </td>
-                                        <td>
-                                            <div class="input-group input-group-sm">
-                                                <span class="input-group-prepend"><span class="input-group-text">$</span></span>
-                                                <input type="number" step="0.01" class="form-control font-weight-bold text-success" name="precio" value="12.25">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <input type="number" class="form-control form-control-sm text-center" name="stock" value="120">
-                                        </td>
-                                        <td class="text-center">
-                                            <button type="submit" class="btn btn-sm btn-primary" title="Guardar Cambios">
-                                                <i class="fe fe-save"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </form>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+		<div class="row">
+			<!-- COLUMNA IZQUIERDA: INVENTARIO EXISTENTE Y MODIFICACIÓN RÁPIDA -->
+			<div class="col-lg-8">
+				<div class="card">
+					<div
+						class="card-header d-flex justify-content-between align-items-center">
+						<h3 class="card-title">Lista General de Productos</h3>
+						<div class="card-options">
+							<div class="input-group">
+								<input type="text" class="form-control form-control-sm"
+									placeholder="Buscar juguete..."> <span
+									class="input-group-btn">
+									<button class="btn btn-sm btn-default" type="button">
+										<i class="fe fe-search"></i>
+									</button>
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="table-responsive">
+						<table class="table card-table table-vcenter text-nowrap">
+							<thead>
+								<tr>
+									<th>Código / Juguete</th>
+									<th width="150">Precio Mayorista</th>
+									<th width="120">Stock Disp.</th>
+									<th class="text-center">Acción</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!-- Producto de Ejemplo 1 -->
+								<form href="#" method="POST">
+									<tr>
+										<td><span class="text-bold">COD-9942 - Carro a
+												Control Remoto Nitro</span>
+											<div class="small text-muted">Categoría: Vehículos a
+												batería</div></td>
+										<td>
+											<div class="input-group input-group-sm">
+												<span class="input-group-prepend"><span
+													class="input-group-text">$</span></span> <input type="number"
+													step="0.01"
+													class="form-control font-weight-bold text-success"
+													name="precio" value="18.50">
+											</div>
+										</td>
+										<td><input type="number"
+											class="form-control form-control-sm text-center" name="stock"
+											value="45"></td>
+										<td class="text-center">
+											<button type="submit" class="btn btn-sm btn-primary"
+												title="Guardar Cambios">
+												<i class="fe fe-save"></i>
+											</button>
+										</td>
+									</tr>
+								</form>
 
-            <!-- COLUMNA DERECHA: FORMULARIO PARA AGREGAR NUEVO JUGUETE -->
-            <div class="col-lg-4">
-                <div class="card border-green">
-                    <div class="card-header bg-green text-white">
-                        <h3 class="card-title"><i class="fe fe-plus-circle"></i> Registrar Nuevo Juguete</h3>
-                    </div>
-                    <div class="card-body">
-                        <form href="#" method="POST">
-                            <!-- Código del Producto -->
-                            <div class="form-group mb-2">
-                                <label class="form-label text-bold">Código Interno</label>
-                                <input type="text" class="form-control form-control-sm" name="codigo" placeholder="Ej: COD-2034" required>
-                            </div>
+								<!-- Producto de Ejemplo 2 -->
+								<form href="#" method="POST">
+									<tr>
+										<td><span class="text-bold">COD-1053 - Muñeca
+												Articulada Princesa</span>
+											<div class="small text-muted">Categoría: Muñecas y
+												Accesorios</div></td>
+										<td>
+											<div class="input-group input-group-sm">
+												<span class="input-group-prepend"><span
+													class="input-group-text">$</span></span> <input type="number"
+													step="0.01"
+													class="form-control font-weight-bold text-success"
+													name="precio" value="12.25">
+											</div>
+										</td>
+										<td><input type="number"
+											class="form-control form-control-sm text-center" name="stock"
+											value="120"></td>
+										<td class="text-center">
+											<button type="submit" class="btn btn-sm btn-primary"
+												title="Guardar Cambios">
+												<i class="fe fe-save"></i>
+											</button>
+										</td>
+									</tr>
+								</form>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
 
-                            <!-- Nombre del Producto -->
-                            <div class="form-group mb-2">
-                                <label class="form-label text-bold">Nombre del Juguete</label>
-                                <input type="text" class="form-control form-control-sm" name="nombre" placeholder="Ej: Oso de Peluche Gigante 1m" required>
-                            </div>
+			<!-- COLUMNA DERECHA: FORMULARIO PARA AGREGAR NUEVO JUGUETE -->
+			<div class="col-lg-4">
+				<div class="card border-green">
+					<div class="card-header bg-green text-white">
+						<h3 class="card-title">
+							<i class="fe fe-plus-circle"></i> Registrar Nuevo Juguete
+						</h3>
+					</div>
+					<div class="card-body">
+						<form href="#" method="POST">
+							<!-- Código del Producto -->
+							<div class="form-group mb-2">
+								<label class="form-label text-bold">Código Interno</label> <input
+									type="text" class="form-control form-control-sm" name="codigo"
+									placeholder="Ej: COD-2034" required>
+							</div>
 
-                            <!-- Categoría -->
-                            <div class="form-group mb-2">
-                                <label class="form-label text-bold">Categoría</label>
-                                <select class="form-control form-control-sm" name="categoria">
-                                    <option value="Vehículos">Vehículos / Pistas</option>
-                                    <option value="Muñecas">Muñecas y Figuras</option>
-                                    <option value="Didácticos">Juguetes Didácticos</option>
-                                    <option value="Mesa">Juegos de Mesa</option>
-                                </select>
-                            </div>
+							<!-- Nombre del Producto -->
+							<div class="form-group mb-2">
+								<label class="form-label text-bold">Nombre del Juguete</label> <input
+									type="text" class="form-control form-control-sm" name="nombre"
+									placeholder="Ej: Oso de Peluche Gigante 1m" required>
+							</div>
 
-                            <!-- Precio Inicial -->
-                            <div class="form-group mb-2">
-                                <label class="form-label text-bold">Precio Mayorista Inicial</label>
-                                <div class="input-group input-group-sm">
-                                    <span class="input-group-prepend"><span class="input-group-text">$</span></span>
-                                    <input type="number" step="0.01" class="form-control text-success font-weight-bold" name="precioInicial" placeholder="0.00" required>
-                                </div>
-                            </div>
+							<!-- Categoría -->
+							<div class="form-group mb-2">
+								<label class="form-label text-bold">Categoría</label> <select
+									class="form-control form-control-sm" name="categoria">
+									<!-- Borramos las opciones fijas y ponemos este bucle dinámico -->
+									<option th:each="cat : ${listaCategorias}"
+										th:value="${cat.idCategoria}" th:text="${cat.nombre}">
+										Categoría Dinámica</option>
+								</select>
+							</div>
 
-                            <!-- Cantidad Inicial -->
-                            <div class="form-group mb-4">
-                                <label class="form-label text-bold">Cantidad de Ingreso (Stock)</label>
-                                <input type="number" class="form-control form-control-sm" name="stockInicial" placeholder="Ej: 50" required>
-                            </div>
+							<!-- Precio Inicial -->
+							<div class="form-group mb-2">
+								<label class="form-label text-bold">Precio Mayorista
+									Inicial</label>
+								<div class="input-group input-group-sm">
+									<span class="input-group-prepend"><span
+										class="input-group-text">$</span></span> <input type="number"
+										step="0.01" class="form-control text-success font-weight-bold"
+										name="precioInicial" placeholder="0.00" required>
+								</div>
+							</div>
 
-                            <!-- Botón Enviar -->
-                            <button type="submit" class="btn btn-green btn-block text-bold">
-                                <i class="fe fe-check"></i> Ingresar al Sistema
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+							<!-- Cantidad Inicial -->
+							<div class="form-group mb-4">
+								<label class="form-label text-bold">Cantidad de Ingreso
+									(Stock)</label> <input type="number"
+									class="form-control form-control-sm" name="stockInicial"
+									placeholder="Ej: 50" required>
+							</div>
 
-    </div>
+							<!-- Botón Enviar -->
+							<button type="submit" class="btn btn-green btn-block text-bold">
+								<i class="fe fe-check"></i> Ingresar al Sistema
+							</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
 </body>
 </html>

@@ -3,64 +3,88 @@ package com.uisrael.consumoweb.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.uisrael.consumoweb.model.dto.response.ClienteResponseDto;
+import com.uisrael.consumoweb.services.IClienteService;
 
 @Controller
 @RequestMapping("/vendedor")
 public class VendedorController {
-    
-    // ==========================================
-    // VISTAS (GET) - Muestran las páginas HTML
-    // ==========================================
 
-    @GetMapping({"", "/", "/inicio"})
-    public String leerpaginaInicio() {
-        return "vendedor/inicio"; 
-    }
+	private IClienteService servicioCliente;
 
-    @GetMapping("/atender")
-    public String irAtender() {
-        return "vendedor/atender";
-    }
+	public VendedorController(IClienteService servicioCliente) {
+		this.servicioCliente = servicioCliente;
+	}
 
-    @GetMapping("/atender/nuevo")
-    public String irNuevoCliente() {
-        return "vendedor/nuevoCliente";
-    }
+	@GetMapping({ "", "/", "/inicio" })
+	public String leerpaginaInicio() {
+		return "vendedor/inicio";
+	}
 
-    @GetMapping("/atender/credito")
-    public String irSolicitudCredito() {
-        // CORREGIDO: Apunta exactamente a tu archivo solicitudcredito.html
-        return "vendedor/solicitudcredito";
-    }
-    
-    @GetMapping("/productos")
-    public String irCatalogo(Model model) {
-        return "vendedor/productos"; 
-    }
+	@GetMapping("/atender")
+	public String irAtender() {
+		return "vendedor/atender";
+	}
 
-    @GetMapping("/carrito")
-    public String irPedido() {
-        return "vendedor/pedido";
-    }
+	@GetMapping("/atender/nuevo")
+	public String irNuevoCliente(Model model) {
+		model.addAttribute("clienteDto", new ClienteResponseDto());
+		return "vendedor/nuevoCliente";
+	}
 
-    // ==========================================
-    // PROCESOS (POST) - Reciben formularios y REDIRIGEN
-    // ==========================================
+	@GetMapping("/atender/credito")
+	public String irSolicitudCredito(@RequestParam(value = "idCliente", defaultValue = "1") int idCliente,
+			Model model) {
+		boolean tieneCredito = servicioCliente.tieneCreditoAprobado(idCliente);
+		model.addAttribute("tieneCreditoAprobado", tieneCredito);
+		model.addAttribute("idCliente", idCliente);
 
-    @PostMapping("/atender/registrar-base")
-    public String registrarClienteBase() {
-        return "redirect:/vendedor/productos";
-    }
+		return "vendedor/solicitudcredito";
+	}
 
-    @PostMapping("/atender/registrar-credito")
-    public String procesarCreditoYContinuar() {
-        return "redirect:/vendedor/productos";
-    }
+	@GetMapping("/productos")
+	public String irCatalogo(Model model) {
+		return "vendedor/productos";
+	}
 
-    @PostMapping("/pedido/guardar-final")
-    public String guardarPedidoFinal() {
-        return "redirect:/vendedor/inicio";
-    }
+	@GetMapping("/carrito")
+	public String irPedido() {
+		return "vendedor/pedido";
+	}
+
+	@PostMapping("/atender/registrar-base")
+	public String registrarClienteBase(@ModelAttribute("clienteDto") ClienteResponseDto cliente, Model model) {
+		try {
+			ClienteResponseDto clienteRegistrado = servicioCliente.registrar(cliente);
+			System.out
+					.println("Controller: Cliente registrado exitosamente con ID: " + clienteRegistrado.getIdCliente());
+		} catch (Exception e) {
+			System.out.println(" Error en Controller al registrar cliente: " + e.getMessage());
+		}
+		return "redirect:/vendedor/productos";
+	}
+
+	@PostMapping("/atender/registrar-credito")
+	public String procesarCreditoYContinuar(@RequestParam("idCliente") int idCliente,
+			@RequestParam("monto") double monto) {
+		try {
+			boolean solicitado = servicioCliente.solicitarCredito(idCliente, monto);
+			System.out.println("Controller: ¿Solicitud de crédito enviada?: " + solicitado);
+		} catch (Exception e) {
+			System.out.println("Error en Controller al solicitar crédito: " + e.getMessage());
+		}
+
+		return "redirect:/vendedor/productos";
+	}
+
+	@PostMapping("/pedido/guardar-final")
+	public String guardarPedidoFinal() {
+		System.out.println("Controller: Procesando el guardado final del carrito de compras...");
+		return "redirect:/vendedor/inicio";
+	}
 }
