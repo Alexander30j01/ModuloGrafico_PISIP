@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{plantilla/plantillasupervisor}">
+
+
+<head>
+
+    <title>
+        Monitoreo de Vendedores
+    </title>
+
+</head>
+
+
+
+<body>
+
+
+<div layout:fragment="content">
+
+
+
+    <!-- MENSAJE -->
+
+    <div th:if="${mensaje}"
+         class="alert alert-success alert-dismissible fade show">
+
+
+        <span th:text="${mensaje}"></span>
+
+
+
+        <button type="button"
+                class="close"
+                data-dismiss="alert">
+
+
+            <span>&times;</span>
+
+
+        </button>
+
+
+    </div>
+
+
+
+
+
+
+
+    <!-- CABECERA -->
+
+
+    <div class="page-header mb-4">
+
+
+        <div>
+
+
+            <h1 class="page-title">
+
+
+                <i class="fe fe-users text-success"></i>
+
+
+                Monitoreo de Vendedores
+
+
+            </h1>
+
+
+
+            <p class="text-muted">
+
+                Seguimiento del desempeño comercial del equipo.
+
+            </p>
+
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- TABLA VENDEDORES -->
+
+
+    <div class="card">
+
+
+        <div class="card-header">
+
+
+            <h3 class="card-title">
+
+                Equipo Comercial
+
+            </h3>
+
+
+        </div>
+
+
+
+
+
+        <div class="table-responsive">
+
+
+            <table class="table table-hover table-vcenter card-table">
+
+
+
+                <thead>
+
+
+                <tr>
+
+
+                    <th>
+                        Vendedor
+                    </th>
+
+
+                    <th>
+                        Provincia
+                    </th>
+
+
+                    <th>
+                        Clientes
+                    </th>
+
+
+                    <th>
+                        Ventas
+                    </th>
+
+
+                    <th>
+                        Meta
+                    </th>
+
+
+                    <th>
+                        Estado
+                    </th>
+
+
+                    <th>
+                        Ubicación
+                    </th>
+
+
+                    <th>
+                        Acción
+                    </th>
+
+
+                </tr>
+
+
+                </thead>
+
+
+
+
+
+                <tbody>
+
+
+
+                <tr th:each="vendedor : ${vendedores}">
+
+
+
+                    <td>
+
+
+                        <strong th:text="${vendedor.nombre + ' ' + vendedor.apellido}">
+
+                            Nombre Vendedor
+
+                        </strong>
+
+
+                    </td>
+
+
+
+
+
+                    <td th:text="${vendedor.provincia}">
+
+                        Provincia
+
+                    </td>
+
+
+
+
+
+                    <td th:text="${vendedor.clientesAsignados}">
+
+                        0
+
+                    </td>
+
+
+
+
+
+                    <td>
+
+
+                        $
+
+                        <span th:text="${vendedor.ventas}">
+
+                            0
+
+                        </span>
+
+
+                    </td>
+
+
+
+
+
+                    <td>
+
+
+                        <span class="badge badge-success"
+                              th:text="${vendedor.meta + '%'}">
+
+                            0%
+
+                        </span>
+
+
+                    </td>
+
+
+
+
+
+
+
+                    <td>
+
+
+                        <span class="badge badge-primary"
+                              th:text="${vendedor.estado}">
+
+                            Activo
+
+                        </span>
+
+
+                    </td>
+
+
+
+
+
+
+
+                    <td th:text="${vendedor.ubicacion}">
+
+                        Quito
+
+                    </td>
+
+
+
+
+
+
+
+                    <td>
+
+
+                        <form th:action="@{/supervisor/actualizarUbicacion}"
+                              method="post">
+
+
+                            <input type="hidden"
+                                   name="idVendedor"
+                                   th:value="${vendedor.idVendedor}">
+
+
+
+                            <button type="submit"
+                                    class="btn btn-sm btn-info">
+
+
+                                <i class="fe fe-map-pin"></i>
+
+
+                                Actualizar
+
+
+                            </button>
+
+
+
+                        </form>
+
+
+                    </td>
+
+
+
+
+
+                </tr>
+
+
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+
+    <br>
+
+
+
+
+
+
+    <!-- RESUMEN -->
+
+
+    <div class="row">
+
+
+
+
+
+        <div class="col-lg-6">
+
+
+            <div class="card">
+
+
+                <div class="card-header bg-success text-white">
+
+
+                    <h3 class="card-title">
+
+                        Resumen Comercial
+
+                    </h3>
+
+
+                </div>
+
+
+
+
+                <div class="card-body">
+
+
+
+                    <h4>
+
+                        Vendedores Activos
+
+                    </h4>
+
+
+
+                    <h2 class="text-success"
+                        th:text="${#lists.size(vendedores)}">
+
+                        0
+
+                    </h2>
+
+
+
+
+
+                    <hr>
+
+
+
+
+
+                    <h4>
+
+                        Seguimiento
+
+                    </h4>
+
+
+
+                    <div class="progress">
+
+
+                        <div class="progress-bar bg-success"
+                             style="width:82%">
+
+
+                            82%
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+
+
+        <div class="col-lg-6">
+
+
+            <div class="card">
+
+
+                <div class="card-header bg-primary text-white">
+
+
+                    <h3 class="card-title">
+
+                        Alertas Supervisor
+
+                    </h3>
+
+
+                </div>
+
+
+
+
+                <div class="card-body">
+
+
+
+                    <div class="alert alert-warning">
+
+                        Revisar vendedores con meta menor al 70%.
+
+                    </div>
+
+
+
+                    <div class="alert alert-success">
+
+                        Equipo comercial operativo.
+
+                    </div>
+
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+</div>
+
+
+</body>
+
+
+</html>

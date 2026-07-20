@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{plantilla/plantillasupervisor}">
+
+<head>
+
+    <title>
+        Inicio Supervisor
+    </title>
+
+</head>
+
+
+<body>
+
+
+<div layout:fragment="content">
+
+
+
+    <!-- MENSAJE -->
+
+    <div th:if="${mensaje}"
+         class="alert alert-success alert-dismissible fade show">
+
+        <span th:text="${mensaje}">
+        </span>
+
+
+        <button type="button"
+                class="close"
+                data-dismiss="alert">
+
+            <span>
+                &times;
+            </span>
+
+        </button>
+
+    </div>
+
+
+
+
+
+
+    <!-- CABECERA -->
+
+    <div class="page-header mb-4">
+
+
+        <div>
+
+
+            <h1 class="page-title">
+
+                <i class="fe fe-eye text-success"></i>
+
+                Panel de Supervisión Comercial
+
+            </h1>
+
+
+            <p class="text-muted">
+
+                Control general de operaciones de Importadora El Rey.
+
+            </p>
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+    <!-- INDICADORES -->
+
+    <div class="row">
+
+
+
+        <div class="col-lg-3 col-md-6">
+
+
+            <div class="card">
+
+
+                <div class="card-body text-center">
+
+
+                    <i class="fe fe-shopping-cart text-primary"
+                       style="font-size:35px;">
+                    </i>
+
+
+                    <h2 class="text-primary mt-3"
+                        th:text="${pedidosPendientes}">
+
+                        18
+
+                    </h2>
+
+
+                    <p class="text-muted">
+
+                        Pedidos Pendientes
+
+                    </p>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+        <div class="col-lg-3 col-md-6">
+
+
+            <div class="card">
+
+
+                <div class="card-body text-center">
+
+
+                    <i class="fe fe-dollar-sign text-success"
+                       style="font-size:35px;">
+                    </i>
+
+
+                    <h2 class="text-success mt-3">
+
+                        $
+
+                        <span th:text="${ventasDia}">
+                            28540
+                        </span>
+
+                    </h2>
+
+
+                    <p class="text-muted">
+
+                        Ventas del Día
+
+                    </p>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+
+        <div class="col-lg-3 col-md-6">
+
+
+            <div class="card">
+
+
+                <div class="card-body text-center">
+
+
+                    <i class="fe fe-users text-warning"
+                       style="font-size:35px;">
+                    </i>
+
+
+                    <h2 class="text-warning mt-3"
+                        th:text="${vendedoresActivos}">
+
+                        8
+
+                    </h2>
+
+
+                    <p class="text-muted">
+
+                        Vendedores Activos
+
+                    </p>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+
+
+        <div class="col-lg-3 col-md-6">
+
+
+            <div class="card">
+
+
+                <div class="card-body text-center">
+
+
+                    <i class="fe fe-user text-info"
+                       style="font-size:35px;">
+                    </i>
+
+
+                    <h2 class="text-info mt-3"
+                        th:text="${clientesVisitados}">
+
+                        52
+
+                    </h2>
+
+
+                    <p class="text-muted">
+
+                        Clientes Visitados
+
+                    </p>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+
+    <br>
+
+
+
+
+
+    <!-- SEGUNDA SECCION -->
+
+    <div class="row">
+
+
+
+
+
+        <!-- PEDIDOS RECIENTES -->
+
+        <div class="col-lg-7">
+
+
+            <div class="card">
+
+
+                <div class="card-header">
+
+
+                    <h3 class="card-title">
+
+                        Pedidos Recientes
+
+                    </h3>
+
+
+                </div>
+
+
+
+                <div class="table-responsive">
+
+
+                    <table class="table card-table">
+
+
+                        <thead>
+
+                        <tr>
+
+                            <th>
+                                Pedido
+                            </th>
+
+                            <th>
+                                Cliente
+                            </th>
+
+                            <th>
+                                Total
+                            </th>
+
+                            <th>
+                                Estado
+                            </th>
+
+
+                        </tr>
+
+                        </thead>
+
+
+
+                        <tbody>
+
+
+                        <tr>
+
+
+                            <td>
+                                #PED-1001
+                            </td>
+
+
+                            <td>
+                                Bazar Mil Novedades
+                            </td>
+
+
+                            <td>
+                                $2500
+                            </td>
+
+
+                            <td>
+
+                                <span class="badge badge-warning">
+
+                                    Pendiente
+
+                                </span>
+
+                            </td>
+
+
+                        </tr>
+
+
+
+
+
+                        <tr>
+
+
+                            <td>
+                                #PED-1002
+                            </td>
+
+
+                            <td>
+                                Comercial Ortega
+                            </td>
+
+
+                            <td>
+                                $1800
+                            </td>
+
+
+                            <td>
+
+                                <span class="badge badge-success">
+
+                                    Aprobado
+
+                                </span>
+
+                            </td>
+
+
+                        </tr>
+
+
+
+                        </tbody>
+
+
+                    </table>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+
+
+        <!-- ACCIONES -->
+
+        <div class="col-lg-5">
+
+
+            <div class="card">
+
+
+                <div class="card-header bg-success text-white">
+
+
+                    <h3 class="card-title">
+
+                        Acciones Supervisor
+
+                    </h3>
+
+
+                </div>
+
+
+
+
+                <div class="card-body">
+
+
+
+                    <a th:href="@{/supervisor/pedidos}"
+                       class="btn btn-primary btn-block">
+
+                        <i class="fe fe-shopping-cart"></i>
+
+                        Revisar Pedidos
+
+                    </a>
+
+
+
+
+                    <br>
+
+
+
+
+                    <a th:href="@{/supervisor/monitoreo}"
+                       class="btn btn-info btn-block">
+
+                        <i class="fe fe-users"></i>
+
+                        Monitorear Vendedores
+
+                    </a>
+
+
+
+
+                    <br>
+
+
+
+
+                    <a th:href="@{/supervisor/reportes}"
+                       class="btn btn-success btn-block">
+
+
+                        <i class="fe fe-bar-chart"></i>
+
+                        Ver Reportes
+
+
+                    </a>
+
+
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+</div>
+
+
+</body>
+
+
+</html>

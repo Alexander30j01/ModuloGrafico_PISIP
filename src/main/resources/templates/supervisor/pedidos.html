@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{plantilla/plantillasupervisor}">
+
+
+<head>
+
+    <title>
+        Revisión de Pedidos
+    </title>
+
+</head>
+
+
+
+<body>
+
+
+<div layout:fragment="content">
+
+
+
+    <!-- MENSAJE -->
+
+    <div th:if="${mensaje}"
+         class="alert alert-success alert-dismissible fade show">
+
+        <span th:text="${mensaje}"></span>
+
+
+        <button type="button"
+                class="close"
+                data-dismiss="alert">
+
+            <span>&times;</span>
+
+        </button>
+
+
+    </div>
+
+
+
+
+
+    <!-- CABECERA -->
+
+
+    <div class="page-header mb-4">
+
+
+        <div>
+
+
+            <h1 class="page-title">
+
+                <i class="fe fe-shopping-cart text-primary"></i>
+
+                Revisión de Pedidos
+
+            </h1>
+
+
+            <p class="text-muted">
+
+                Control y aprobación de pedidos comerciales.
+
+            </p>
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+
+
+    <!-- TABLA PEDIDOS -->
+
+
+    <div class="card">
+
+
+        <div class="card-header">
+
+
+            <h3 class="card-title">
+
+                Pedidos Comerciales
+
+            </h3>
+
+
+        </div>
+
+
+
+
+
+        <div class="table-responsive">
+
+
+            <table class="table table-hover table-vcenter card-table">
+
+
+
+                <thead>
+
+
+                <tr>
+
+                    <th>
+                        Pedido
+                    </th>
+
+
+                    <th>
+                        Cliente
+                    </th>
+
+
+                    <th>
+                        Vendedor
+                    </th>
+
+
+                    <th>
+                        Provincia
+                    </th>
+
+
+                    <th>
+                        Total
+                    </th>
+
+
+                    <th>
+                        Estado
+                    </th>
+
+
+                    <th>
+                        Acciones
+                    </th>
+
+
+                </tr>
+
+
+                </thead>
+
+
+
+
+
+                <tbody>
+
+
+
+                <tr th:each="pedido : ${pedidos}">
+
+
+
+                    <td th:text="${pedido.numeroPedido}">
+                        PED-000
+                    </td>
+
+
+
+
+                    <td th:text="${pedido.cliente}">
+                        Cliente
+                    </td>
+
+
+
+
+                    <td th:text="${pedido.vendedor}">
+                        Vendedor
+                    </td>
+
+
+
+
+                    <td th:text="${pedido.provincia}">
+                        Provincia
+                    </td>
+
+
+
+
+                    <td>
+
+                        $
+
+                        <span th:text="${pedido.total}">
+                            0
+                        </span>
+
+
+                    </td>
+
+
+
+
+
+
+                    <td>
+
+
+                        <span class="badge badge-warning"
+                              th:if="${pedido.estado == 'Pendiente'}">
+
+                            Pendiente
+
+                        </span>
+
+
+
+                        <span class="badge badge-success"
+                              th:if="${pedido.estado == 'Aprobado'}">
+
+                            Aprobado
+
+                        </span>
+
+
+
+
+                        <span class="badge badge-danger"
+                              th:if="${pedido.estado == 'Rechazado'}">
+
+                            Rechazado
+
+                        </span>
+
+
+
+                    </td>
+
+
+
+
+
+
+                    <td>
+
+
+
+                        <form th:action="@{/supervisor/aprobar}"
+                              method="post"
+                              style="display:inline;">
+
+
+                            <input type="hidden"
+                                   name="idPedido"
+                                   th:value="${pedido.idPedido}">
+
+
+
+                            <button type="submit"
+                                    class="btn btn-sm btn-success">
+
+
+                                <i class="fe fe-check"></i>
+
+                                Aprobar
+
+
+                            </button>
+
+
+
+                        </form>
+
+
+
+
+
+
+
+
+                        <form th:action="@{/supervisor/rechazar}"
+                              method="post"
+                              style="display:inline;">
+
+
+                            <input type="hidden"
+                                   name="idPedido"
+                                   th:value="${pedido.idPedido}">
+
+
+
+                            <button type="submit"
+                                    class="btn btn-sm btn-danger">
+
+
+                                <i class="fe fe-x"></i>
+
+                                Rechazar
+
+
+                            </button>
+
+
+
+                        </form>
+
+
+
+                    </td>
+
+
+
+
+                </tr>
+
+
+
+                </tbody>
+
+
+
+            </table>
+
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+
+
+    <br>
+
+
+
+
+
+
+
+
+    <!-- DETALLE PEDIDO -->
+
+
+    <div class="row">
+
+
+        <div class="col-lg-6">
+
+
+            <div class="card">
+
+
+                <div class="card-header bg-primary text-white">
+
+
+                    <h3 class="card-title">
+
+                        Detalle del Pedido
+
+                    </h3>
+
+
+                </div>
+
+
+
+                <div class="card-body">
+
+
+                    <table class="table table-bordered">
+
+
+                        <tr>
+
+                            <th>
+                                Cliente
+                            </th>
+
+
+                            <td>
+                                Seleccione un pedido
+                            </td>
+
+                        </tr>
+
+
+
+                        <tr>
+
+                            <th>
+                                Estado
+                            </th>
+
+
+                            <td>
+                                Pendiente
+                            </td>
+
+                        </tr>
+
+
+
+                        <tr>
+
+                            <th>
+                                Observación
+                            </th>
+
+
+                            <td>
+                                Sin observaciones
+                            </td>
+
+                        </tr>
+
+
+                    </table>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+
+
+
+        <!-- OBSERVACIONES -->
+
+
+        <div class="col-lg-6">
+
+
+            <div class="card">
+
+
+                <div class="card-header bg-success text-white">
+
+
+                    <h3 class="card-title">
+
+                        Observaciones Supervisor
+
+                    </h3>
+
+
+                </div>
+
+
+
+
+                <div class="card-body">
+
+
+
+                    <form th:action="@{/supervisor/guardarObservacion}"
+                          method="post">
+
+
+
+                        <textarea class="form-control"
+                                  rows="5"
+                                  name="observacion"
+                                  placeholder="Ingrese observaciones del pedido...">
+                        </textarea>
+
+
+
+
+                        <br>
+
+
+
+
+                        <button type="submit"
+                                class="btn btn-success btn-block">
+
+
+                            <i class="fe fe-save"></i>
+
+                            Guardar Observación
+
+
+                        </button>
+
+
+
+                    </form>
+
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+</div>
+
+
+</body>
+
+
+</html>

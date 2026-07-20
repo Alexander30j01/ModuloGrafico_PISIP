@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{plantilla/plantillasupervisor}">
+
+
+<head>
+
+    <title>
+        Reportes Comerciales
+    </title>
+
+</head>
+
+
+
+<body>
+
+
+<div layout:fragment="content">
+
+
+
+    <!-- MENSAJE -->
+
+    <div th:if="${mensaje}"
+         class="alert alert-success alert-dismissible fade show">
+
+
+        <span th:text="${mensaje}"></span>
+
+
+
+        <button type="button"
+                class="close"
+                data-dismiss="alert">
+
+
+            <span>&times;</span>
+
+
+        </button>
+
+
+    </div>
+
+
+
+
+
+
+
+    <!-- CABECERA -->
+
+
+    <div class="page-header mb-4">
+
+
+        <div>
+
+
+            <h1 class="page-title">
+
+
+                <i class="fe fe-bar-chart-2 text-primary"></i>
+
+
+                Reportes Comerciales
+
+
+            </h1>
+
+
+
+            <p class="text-muted">
+
+                Indicadores comerciales y desempeño empresarial.
+
+            </p>
+
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+
+    <!-- INDICADORES -->
+
+
+    <div class="row">
+
+
+
+
+
+        <div class="col-lg-3 col-md-6">
+
+
+            <div class="card">
+
+
+                <div class="card-body text-center">
+
+
+                    <h2 class="text-success">
+
+
+                        $
+
+                        <span th:text="${reporte.totalVentas}">
+
+                            0
+
+                        </span>
+
+
+                    </h2>
+
+
+
+                    <p class="text-muted">
+
+                        Ventas Totales
+
+                    </p>
+
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+
+        <div class="col-lg-3 col-md-6">
+
+
+            <div class="card">
+
+
+                <div class="card-body text-center">
+
+
+                    <h2 class="text-primary"
+                        th:text="${reporte.pedidosProcesados}">
+
+                        0
+
+                    </h2>
+
+
+
+                    <p class="text-muted">
+
+                        Pedidos Procesados
+
+                    </p>
+
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+
+
+        <div class="col-lg-3 col-md-6">
+
+
+            <div class="card">
+
+
+                <div class="card-body text-center">
+
+
+                    <h2 class="text-warning"
+                        th:text="${reporte.clientesActivos}">
+
+                        0
+
+                    </h2>
+
+
+
+                    <p class="text-muted">
+
+                        Clientes Activos
+
+                    </p>
+
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+
+
+        <div class="col-lg-3 col-md-6">
+
+
+            <div class="card">
+
+
+                <div class="card-body text-center">
+
+
+                    <h2 class="text-info"
+                        th:text="${reporte.porcentajeMeta + '%'}">
+
+                        0%
+
+                    </h2>
+
+
+
+                    <p class="text-muted">
+
+                        Cumplimiento Meta
+
+                    </p>
+
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+    <br>
+
+
+
+
+
+
+
+    <!-- REPORTE DETALLE -->
+
+
+    <div class="row">
+
+
+
+
+
+        <div class="col-lg-7">
+
+
+            <div class="card">
+
+
+                <div class="card-header">
+
+
+                    <h3 class="card-title">
+
+                        Resumen Comercial
+
+                    </h3>
+
+
+                </div>
+
+
+
+
+
+                <div class="table-responsive">
+
+
+                    <table class="table table-bordered">
+
+
+
+                        <tr>
+
+                            <th>
+                                Tipo de Reporte
+                            </th>
+
+
+                            <td th:text="${reporte.tipoReporte}">
+
+                                Reporte Comercial
+
+                            </td>
+
+
+                        </tr>
+
+
+
+
+                        <tr>
+
+                            <th>
+                                Periodo
+                            </th>
+
+
+                            <td th:text="${reporte.periodo}">
+
+                                Mes actual
+
+                            </td>
+
+
+                        </tr>
+
+
+
+
+                        <tr>
+
+                            <th>
+                                Ventas Generadas
+                            </th>
+
+
+                            <td>
+
+
+                                $
+
+                                <span th:text="${reporte.totalVentas}">
+                                    0
+                                </span>
+
+
+                            </td>
+
+
+                        </tr>
+
+
+
+
+                        <tr>
+
+                            <th>
+                                Pedidos Procesados
+                            </th>
+
+
+                            <td th:text="${reporte.pedidosProcesados}">
+
+                                0
+
+                            </td>
+
+
+                        </tr>
+
+
+
+
+                    </table>
+
+
+                </div>
+
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+
+
+
+        <!-- ACCIONES -->
+
+
+        <div class="col-lg-5">
+
+
+            <div class="card border-primary">
+
+
+                <div class="card-header bg-primary text-white">
+
+
+                    <h3 class="card-title">
+
+                        Gestión de Reportes
+
+                    </h3>
+
+
+                </div>
+
+
+
+
+                <div class="card-body">
+
+
+
+
+
+                    <form th:action="@{/supervisor/generarReporte}"
+                          method="post">
+
+
+                        <button class="btn btn-success btn-block">
+
+
+                            <i class="fe fe-refresh-cw"></i>
+
+
+                            Generar Reporte
+
+
+                        </button>
+
+
+                    </form>
+
+
+
+
+
+                    <br>
+
+
+
+
+
+                    <form th:action="@{/supervisor/exportarExcel}"
+                          method="post">
+
+
+                        <button class="btn btn-primary btn-block">
+
+
+                            <i class="fe fe-file-text"></i>
+
+
+                            Exportar Excel
+
+
+                        </button>
+
+
+                    </form>
+
+
+
+
+
+                    <br>
+
+
+
+
+
+                    <form th:action="@{/supervisor/exportarPdf}"
+                          method="post">
+
+
+                        <button class="btn btn-danger btn-block">
+
+
+                            <i class="fe fe-file"></i>
+
+
+                            Exportar PDF
+
+
+                        </button>
+
+
+                    </form>
+
+
+
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+    <br>
+
+
+
+
+
+
+
+
+    <!-- ALERTAS -->
+
+
+    <div class="card">
+
+
+        <div class="card-header bg-warning">
+
+
+            <h3 class="card-title">
+
+                Observaciones Comerciales
+
+            </h3>
+
+
+        </div>
+
+
+
+
+        <div class="card-body">
+
+
+
+            <div class="alert alert-success">
+
+                Las ventas cumplen con la meta establecida.
+
+            </div>
+
+
+
+            <div class="alert alert-info">
+
+                Revisar comportamiento de vendedores semanalmente.
+
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+</div>
+
+
+</body>
+
+
+</html>
