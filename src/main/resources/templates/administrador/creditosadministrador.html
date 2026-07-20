@@ -35,31 +35,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="bg-gray-lightest" style="border-left: 3px solid #467fcf;">
+                                <tr th:each="solicitud : ${listaSolicitudes}">
                                     <td>
-                                        <span class="text-bold">Bazar "Mil Novedades"</span>
-                                        <div class="small text-muted">RUC: 1792456789001</div>
+                                        <span class="text-bold" th:text="${solicitud.clienteNombre}">Bazar Mil Novedades</span>
+                                        <div class="small text-muted" th:text="'RUC: ' + ${solicitud.ruc}">RUC: 1792456789001</div>
                                     </td>
-                                    <td class="text-bold text-blue">$2,500.00</td>
-                                    <td><span class="badge badge-warning">En Revisión</span></td>
+                                    <td class="text-bold text-blue" th:text="'$' + ${#numbers.formatDecimal(solicitud.montoSolicitado, 1, 2)}">$2,500.00</td>
+                                    <td><span class="badge badge-warning" th:text="${solicitud.estado}">En Revisión</span></td>
                                     <td class="text-center">
                                         <button class="btn btn-sm btn-primary">
-                                            <i class="fe fe-edit-3"></i> Evaluando
+                                            <i class="fe fe-edit-3"></i> Evaluar
                                         </button>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <span class="text-bold">Comercial Ortega</span>
-                                        <div class="small text-muted">RUC: 0995544332001</div>
-                                    </td>
-                                    <td class="text-bold text-blue">$1,800.00</td>
-                                    <td><span class="badge badge-warning">Pendiente</span></td>
-                                    <td class="text-center">
-                                        <button class="btn btn-sm btn-outline-secondary">
-                                            <i class="fe fe-eye"></i> Seleccionar
-                                        </button>
-                                    </td>
+                                <tr th:if="${#lists.isEmpty(listaSolicitudes)}">
+                                    <td colspan="4" class="text-center text-muted">No existen solicitudes de crédito pendientes.</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -67,7 +57,7 @@
                 </div>
             </div>
 
-            <!-- COLUMNA DERECHA: REDACCIÓN DEL INFORME AVAL Y COMENTARIOS -->
+            <!-- COLUMNA DERECHA: REDACCIÓN DEL INFORME -->
             <div class="col-lg-6">
                 <div class="card border-blue">
                     <div class="card-header bg-blue text-white">
@@ -76,27 +66,27 @@
                     <div class="card-body">
                         <div class="alert alert-secondary p-2 mb-3">
                             <small class="text-muted d-block">Cliente Seleccionado:</small>
-                            <strong>Bazar y Juguetería "Mil Novedades"</strong>
+                            <strong>Seleccione un cliente de la lista</strong>
                         </div>
 
-                        <form href="#" method="POST">
-                            <!-- Detalle Técnico del Informe Aval -->
+                        <!-- Envía al endpoint de la API con un ID de ejemplo o dinámico -->
+                        <form th:action="@{/api/creditos/solicitar}" method="POST">
+                            <input type="hidden" name="idCliente" value="1">
+                            
                             <div class="form-group mb-3">
                                 <label class="form-label text-bold">Redactar Informe Aval del Cliente</label>
                                 <textarea class="form-control" name="informeAvalTexto" rows="5" 
-                                          placeholder="Escriba aquí los detalles del aval. Ejemplo: Se verifica solvencia del local comercial, flujo constante de caja y referencias comerciales positivas..."></textarea>
+                                          placeholder="Escriba aquí los detalles del aval..."></textarea>
                             </div>
 
-                            <!-- Comentarios Adicionales o Dictamen Final -->
                             <div class="form-group mb-4">
                                 <label class="form-label text-bold">Comentarios u Observaciones Gerenciales</label>
                                 <textarea class="form-control" name="comentarioAdmin" rows="3" 
                                           placeholder="Observaciones finales antes de emitir la resolución..."></textarea>
                             </div>
 
-                            <!-- Botones de Resolución Final -->
                             <div class="d-flex justify-content-between align-items-center">
-                                <button type="submit" class="btn btn-danger btn-pill">
+                                <button type="button" class="btn btn-danger btn-pill">
                                     <i class="fe fe-alert-triangle"></i> Rechazar Crédito
                                 </button>
                                 <button type="submit" class="btn btn-success btn-pill text-bold">

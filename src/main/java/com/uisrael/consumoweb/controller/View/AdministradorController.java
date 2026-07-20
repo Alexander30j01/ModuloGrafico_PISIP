@@ -9,46 +9,53 @@ import org.springframework.ui.Model;
 
 import com.uisrael.consumoweb.model.dto.response.CategoriaResponseDto;
 import com.uisrael.consumoweb.services.ICategoriaService;
+import com.uisrael.consumoweb.services.IProductoService;
+import com.uisrael.consumoweb.services.ISolicitudCreditoService;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/administrador")
 public class AdministradorController {
 
 	private final ICategoriaService categoriaService;
+	private final ISolicitudCreditoService solicitudCreditoService;
+	private final IProductoService productoService;
 
-	public AdministradorController(ICategoriaService categoriaService) {
+	
+
+	public AdministradorController(ICategoriaService categoriaService, ISolicitudCreditoService solicitudCreditoService,
+			IProductoService productoService) {
+		super();
 		this.categoriaService = categoriaService;
+		this.solicitudCreditoService = solicitudCreditoService;
+		this.productoService = productoService;
 	}
 
 	@GetMapping({ "", "/", "/inicio" })
-	public String inicioAdmin() {
-		// Apunta a templates/administrador/inicioadmin.html
-		return "administrador/inicioadmin";
+	public String inicioAdministrador() {
+		return "administrador/inicioadministrador";
 	}
 
 	@GetMapping("/creditos")
-	public String creditosAdmin() {
-		// Apunta a templates/administrador/creditosadmin.html
-		return "administrador/creditosadmin";
+	public String creditosAdministrador(Model model) {
+		model.addAttribute("listaSolicitudes", solicitudCreditoService.listarTodo());
+		return "administrador/creditosadministrador";
 	}
 
 	@GetMapping("/productos")
-	public String productosAdmin(Model model) {
+	public String productosAdministrador(Model model) {
 		List<CategoriaResponseDto> resultadoBD = categoriaService.listarTodo();
-		System.out.println(resultadoBD);
 		model.addAttribute("listaCategorias", resultadoBD);
-		return "administrador/productosadmin";
+		model.addAttribute("listaProductos", productoService.listarTodo());
+		return "administrador/productosadministrador";
 	}
 
 	@GetMapping("/provincias")
-	public String provinciasAdmin() {
-		// Apunta a templates/administrador/provinciasadmin.html
-		return "administrador/provinciasadmin";
+	public String provinciasAdministrador() {
+		return "administrador/provinciasadministrador";
 	}
 
 	@GetMapping("/usuarios")
-	public String usuariosAdmin() {
-		// Apunta a templates/administrador/usuariosadmin.html
-		return "administrador/usuariosadmin";
+	public String usuariosAdministrador() {
+		return "administrador/usuariosadministrador";
 	}
 }

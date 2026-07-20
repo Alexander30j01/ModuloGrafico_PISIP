@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{plantilla/plantillaadministrador}">
+<head>
+<title>Gestión de Productos y Precios</title>
+</head>
+<body>
+
+	<div layout:fragment="contentpaginasadmin">
+
+		<!-- CABECERA -->
+		<div class="page-header mb-4">
+			<h1 class="page-title">
+				<i class="fe fe-box"></i> Control de Inventario y Precios Mayoristas
+			</h1>
+			<p class="text-muted mb-0 ml-2">| Panel exclusivo de administración para alta de productos y edición de costos por lote.</p>
+		</div>
+
+		<div class="row">
+			<!-- COLUMNA IZQUIERDA: INVENTARIO EXISTENTE -->
+			<div class="col-lg-8">
+				<div class="card">
+					<div class="card-header d-flex justify-content-between align-items-center">
+						<h3 class="card-title">Lista General de Productos</h3>
+					</div>
+					<div class="table-responsive">
+						<table class="table card-table table-vcenter text-nowrap">
+							<thead>
+								<tr>
+									<th>Código / Juguete</th>
+									<th width="150">Precio Mayorista</th>
+									<th width="120">Stock Disp.</th>
+									<th class="text-center">Acción</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!-- Iteración segura de productos -->
+								<tr th:each="prod : ${listaProductos}">
+									<td>
+										<span class="text-bold" th:text="${prod.codigo} + ' - ' + ${prod.nombre}">COD-9942 - Juguete</span>
+										<div class="small text-muted" th:text="'Categoría: ' + ${prod.categoriaNombre}">Categoría</div>
+									</td>
+									
+									<!-- Formulario correcto metido dentro de las celdas para no romper el HTML -->
+									<form th:action="@{/api/producto/actualizar}" method="POST">
+										<input type="hidden" name="idProducto" th:value="${prod.idProducto}">
+										<td>
+											<div class="input-group input-group-sm">
+												<span class="input-group-prepend"><span class="input-group-text">$</span></span> 
+												<input type="number" step="0.01" class="form-control font-weight-bold text-success" name="precio" th:value="${prod.precio}">
+											</div>
+										</td>
+										<td>
+											<input type="number" class="form-control form-control-sm text-center" name="stock" th:value="${prod.stock}">
+										</td>
+										<td class="text-center">
+											<button type="submit" class="btn btn-sm btn-primary" title="Guardar Cambios">
+												<i class="fe fe-save"></i>
+											</button>
+										</td>
+									</form>
+								</tr>
+								
+								<!-- Si la lista está vacía (evita errores visuales) -->
+								<tr th:if="${#lists.isEmpty(listaProductos)}">
+									<td colspan="4" class="text-center text-muted py-4">
+										<i class="fe fe-database d-block mb-2" style="font-size: 2rem;"></i>
+										No existen productos registrados en el sistema (Simulación o BD vacía).
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+			<!-- COLUMNA DERECHA: FORMULARIO PARA AGREGAR NUEVO JUGUETE -->
+			<div class="col-lg-4">
+				<div class="card border-green">
+					<div class="card-header bg-green text-white">
+						<h3 class="card-title">
+							<i class="fe fe-plus-circle"></i> Registrar Nuevo Juguete
+						</h3>
+					</div>
+					<div class="card-body">
+						<form th:action="@{/api/producto/guardar}" method="POST">
+							<!-- Código del Producto -->
+							<div class="form-group mb-2">
+								<label class="form-label text-bold">Código Interno</label> 
+								<input type="text" class="form-control form-control-sm" name="codigo" placeholder="Ej: COD-2034" required>
+							</div>
+
+							<!-- Nombre del Producto -->
+							<div class="form-group mb-2">
+								<label class="form-label text-bold">Nombre del Juguete</label> 
+								<input type="text" class="form-control form-control-sm" name="nombre" placeholder="Ej: Oso de Peluche" required>
+							</div>
+
+							<!-- Categoría (Bucle dinámico corregido) -->
+							<div class="form-group mb-2">
+								<label class="form-label text-bold">Categoría</label> 
+								<select class="form-control form-control-sm" name="idCategoria" required>
+									<option value="" disabled selected>Seleccione categoría...</option>
+									<option th:each="cat : ${listaCategorias}" th:value="${cat.idCategoria}" th:text="${cat.nombre}">
+										Categoría Dinámica
+									</option>
+								</select>
+							</div>
+
+							<!-- Precio Inicial -->
+							<div class="form-group mb-2">
+								<label class="form-label text-bold">Precio Mayorista Inicial</label>
+								<div class="input-group input-group-sm">
+									<span class="input-group-prepend"><span class="input-group-text">$</span></span> 
+									<input type="number" step="0.01" class="form-control text-success font-weight-bold" name="precio" placeholder="0.00" required>
+								</div>
+							</div>
+
+							<!-- Cantidad Inicial -->
+							<div class="form-group mb-4">
+								<label class="form-label text-bold">Cantidad de Ingreso (Stock)</label> 
+								<input type="number" class="form-control form-control-sm" name="stock" placeholder="Ej: 50" required>
+							</div>
+
+							<!-- Botón Enviar -->
+							<button type="submit" class="btn btn-green btn-block text-bold">
+								<i class="fe fe-check"></i> Ingresar al Sistema
+							</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</body>
+</html>

@@ -2,11 +2,13 @@ package com.uisrael.consumoweb.services.impl;
 
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.uisrael.consumoweb.model.dto.response.DocumentacionResponseDto;
 import com.uisrael.consumoweb.services.IDocumentacionService;
 
+@Service
 public class DocumentacionServiceImpl implements IDocumentacionService {
 
 	private WebClient webClient;

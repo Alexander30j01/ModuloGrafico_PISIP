@@ -1,10 +1,13 @@
 package com.uisrael.consumoweb.services.impl;
 
+import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.uisrael.consumoweb.model.dto.response.UsuariosResponseDto;
 import com.uisrael.consumoweb.services.IUsuariosService;
 
+
+@Service
 public class UsuariosServiceImpl implements IUsuariosService {
 
 	private WebClient webClient;
@@ -66,8 +69,8 @@ public class UsuariosServiceImpl implements IUsuariosService {
 
 	@Override
 	public UsuariosResponseDto generarReporteVisitas(int idUsuario) {
-		return this.webClient.get().uri("/usuarios/reporte-visitas"+idUsuario)
-				.retrieve().bodyToMono(UsuariosResponseDto.class).block();
+		return this.webClient.get().uri("/usuarios/reporte-visitas" + idUsuario).retrieve()
+				.bodyToMono(UsuariosResponseDto.class).block();
 	}
 
 }

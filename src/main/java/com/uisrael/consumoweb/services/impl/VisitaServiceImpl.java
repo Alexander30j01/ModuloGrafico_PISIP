@@ -3,11 +3,13 @@ package com.uisrael.consumoweb.services.impl;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.uisrael.consumoweb.model.dto.response.VisitaResponseDto;
 import com.uisrael.consumoweb.services.IVisitaService;
 
+@Service
 public class VisitaServiceImpl implements IVisitaService {
 
 	private WebClient webClient;

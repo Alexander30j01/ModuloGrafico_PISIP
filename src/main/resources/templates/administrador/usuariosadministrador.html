@@ -48,7 +48,8 @@
                                         <span class="badge badge-success">Activo</span>
                                     </td>
                                     <td class="text-center">
-                                        <form href="#" method="POST" class="d-inline">
+                                        <form th:action="@{/api/usuarios/cambiar-estado}" method="POST" class="d-inline">
+                                            <input type="hidden" name="idUsuario" value="1">
                                             <button type="submit" class="btn btn-sm btn-outline-warning" title="Inactivar / Bloquear">
                                                 <i class="fe fe-lock"></i>
                                             </button>
@@ -68,7 +69,8 @@
                                         <span class="badge badge-success">Activo</span>
                                     </td>
                                     <td class="text-center">
-                                        <form href="#" method="POST" class="d-inline">
+                                        <form th:action="@{/api/usuarios/cambiar-estado}" method="POST" class="d-inline">
+                                            <input type="hidden" name="idUsuario" value="2">
                                             <button type="submit" class="btn btn-sm btn-outline-warning" title="Inactivar / Bloquear">
                                                 <i class="fe fe-lock"></i>
                                             </button>
@@ -106,7 +108,7 @@
                         <h3 class="card-title"><i class="fe fe-user-plus"></i> Registrar Usuario</h3>
                     </div>
                     <div class="card-body">
-                        <form href="#" method="POST">
+                        <form th:action="@{/api/usuarios/guardar}" method="POST">
                             <!-- Nombre Completo -->
                             <div class="form-group mb-2">
                                 <label class="form-label text-bold">Nombres y Apellidos</label>
