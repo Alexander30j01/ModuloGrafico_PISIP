@@ -8,7 +8,6 @@ public class LoginController {
 
     @GetMapping({"/", "/login"})
     public String mostrarLogin() {
-        // Al hacer el refactor del HTML a login.html, aquí devuelves "login"
         return "login"; 
     }
 }

@@ -1,10 +1,11 @@
 package com.uisrael.consumoweb.services.impl;
 
+import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.uisrael.consumoweb.model.dto.response.ClienteResponseDto;
 import com.uisrael.consumoweb.services.IClienteService;
-
+@Service
 public class ClienteServiceImpl implements IClienteService {
 
 	private WebClient webClient;

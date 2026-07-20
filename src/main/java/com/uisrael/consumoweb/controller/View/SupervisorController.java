@@ -1,4 +1,4 @@
-package com.uisrael.consumoweb.controller;
+package com.uisrael.consumoweb.controller.View;
 
 
 import org.springframework.stereotype.Controller;

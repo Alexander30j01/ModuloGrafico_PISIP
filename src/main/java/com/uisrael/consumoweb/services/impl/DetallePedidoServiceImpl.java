@@ -3,16 +3,17 @@ package com.uisrael.consumoweb.services.impl;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.uisrael.consumoweb.model.dto.response.DetallePedidoResponseDto;
 import com.uisrael.consumoweb.services.IDetallePedidoService;
-
-public class DetallePedidoService implements IDetallePedidoService {
+@Service
+public class DetallePedidoServiceImpl implements IDetallePedidoService {
 
 	private WebClient webClient;
 
-	public DetallePedidoService(WebClient webClient) {
+	public DetallePedidoServiceImpl(WebClient webClient) {
 		this.webClient = webClient;
 	}
 
